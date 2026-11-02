@@ -37,6 +37,60 @@ const FALLBACK_DEPARTMENTS: Department[] = [
   { id: "TI", name: "Teknologi Informasi" },
 ];
 
+const FALLBACK_STUDY_PROGRAMS: StudyProgram[] = [
+  // 1. Budidaya Tanaman Pangan
+  { id: "BTP-D3-HTK", departmentId: "BTP", name: "Hortikultura", degreeLevel: "D3" },
+  { id: "BTP-D4-TBN", departmentId: "BTP", name: "Teknologi Perbenihan", degreeLevel: "S1 Terapan" },
+  { id: "BTP-D4-TPP", departmentId: "BTP", name: "Teknologi Produksi Tanaman Pangan", degreeLevel: "S1 Terapan" },
+  { id: "BTP-D4-TPH", departmentId: "BTP", name: "Teknologi Produksi Tanaman Hortikultura", degreeLevel: "S1 Terapan" },
+  { id: "BTP-S2-KP", departmentId: "BTP", name: "Ketahanan Pangan", degreeLevel: "S2 Terapan" },
+  // 2. Budidaya Tanaman Perkebunan
+  { id: "BTKB-D3-PTP", departmentId: "BTKB", name: "Produksi Tanaman Perkebunan", degreeLevel: "D3" },
+  { id: "BTKB-D4-PMIP", departmentId: "BTKB", name: "Produksi dan Manajemen Industri Perkebunan", degreeLevel: "S1 Terapan" },
+  { id: "BTKB-D4-PPK", departmentId: "BTKB", name: "Pengelolaan Perkebunan Kopi", degreeLevel: "S1 Terapan" },
+  { id: "BTKB-D4-TPTP", departmentId: "BTKB", name: "Teknologi Produksi Tanaman Perkebunan", degreeLevel: "S1 Terapan" },
+  // 3. Teknologi Pertanian
+  { id: "TP-D3-MP", departmentId: "TP", name: "Mekanisasi Pertanian", degreeLevel: "D3" },
+  { id: "TP-D3-TPN", departmentId: "TP", name: "Teknologi Pangan", degreeLevel: "D3" },
+  { id: "TP-D4-PPA", departmentId: "TP", name: "Pengembangan Produk Agroindustri", degreeLevel: "S1 Terapan" },
+  { id: "TP-D4-KT", departmentId: "TP", name: "Kimia Terapan", degreeLevel: "S1 Terapan" },
+  { id: "TP-D4-TPH", departmentId: "TP", name: "Teknologi Pangan Halal", degreeLevel: "S1 Terapan" },
+  { id: "TP-D4-GK", departmentId: "TP", name: "Gizi Klinis", degreeLevel: "S1 Terapan" },
+  // 4. Peternakan
+  { id: "PTR-D4-TPT", departmentId: "PTR", name: "Teknologi Pakan Ternak", degreeLevel: "S1 Terapan" },
+  { id: "PTR-D4-TPRT", departmentId: "PTR", name: "Teknologi Produksi Ternak", degreeLevel: "S1 Terapan" },
+  { id: "PTR-D4-AP", departmentId: "PTR", name: "Agribisnis Peternakan", degreeLevel: "S1 Terapan" },
+  // 5. Ekonomi dan Bisnis
+  { id: "EB-D3-PW", departmentId: "EB", name: "Perjalanan Wisata", degreeLevel: "D3" },
+  { id: "EB-D4-AGP", departmentId: "EB", name: "Agribisnis Pangan", degreeLevel: "S1 Terapan" },
+  { id: "EB-D4-PA", departmentId: "EB", name: "Pengelolaan Agribisnis", degreeLevel: "S1 Terapan" },
+  { id: "EB-D4-AKP", departmentId: "EB", name: "Akuntansi Perpajakan", degreeLevel: "S1 Terapan" },
+  { id: "EB-D4-ABD", departmentId: "EB", name: "Akuntansi Bisnis Digital", degreeLevel: "S1 Terapan" },
+  { id: "EB-D4-PPH", departmentId: "EB", name: "Pengelolaan Perhotelan", degreeLevel: "S1 Terapan" },
+  { id: "EB-D4-PKA", departmentId: "EB", name: "Pengelolaan Konvensi dan Acara", degreeLevel: "S1 Terapan" },
+  { id: "EB-D4-BIKBP", departmentId: "EB", name: "Bahasa Inggris untuk Komunikasi Bisnis dan Profesional", degreeLevel: "S1 Terapan" },
+  { id: "EB-D4-PM", departmentId: "EB", name: "Produksi Media", degreeLevel: "S1 Terapan" },
+  { id: "EB-D4-BD", departmentId: "EB", name: "Bisnis Digital", degreeLevel: "S1 Terapan" },
+  { id: "EB-S2-MIA", departmentId: "EB", name: "Manajemen Inovasi Agribisnis", degreeLevel: "S2 Terapan" },
+  // 6. Teknik
+  { id: "TK-D3-TSLL", departmentId: "TK", name: "Teknik Sumberdaya Lahan dan Lingkungan", degreeLevel: "D3" },
+  { id: "TK-D4-TRKJJ", departmentId: "TK", name: "Teknologi Rekayasa Konstruksi Jalan dan Jembatan", degreeLevel: "S1 Terapan" },
+  { id: "TK-D4-TRKI", departmentId: "TK", name: "Teknologi Rekayasa Kimia Industri", degreeLevel: "S1 Terapan" },
+  { id: "TK-D4-TRO", departmentId: "TK", name: "Teknologi Rekayasa Otomotif", degreeLevel: "S1 Terapan" },
+  // 7. Perikanan dan Kelautan
+  { id: "PK-D3-BP", departmentId: "PK", name: "Budidaya Perikanan", degreeLevel: "D3" },
+  { id: "PK-D3-PT", departmentId: "PK", name: "Perikanan Tangkap", degreeLevel: "D3" },
+  { id: "PK-D4-TPI", departmentId: "PK", name: "Teknologi Pembenihan Ikan", degreeLevel: "S1 Terapan" },
+  { id: "PK-D4-TAK", departmentId: "PK", name: "Teknologi Akuakultur", degreeLevel: "S1 Terapan" },
+  { id: "PK-D4-TCPI", departmentId: "PK", name: "Teknologi Cerdas Penangkapan Ikan", degreeLevel: "S1 Terapan" },
+  // 8. Teknologi Informasi
+  { id: "TI-D3-MI", departmentId: "TI", name: "Manajemen Informatika", degreeLevel: "D3" },
+  { id: "TI-D4-TRI", departmentId: "TI", name: "Teknologi Rekayasa Internet", degreeLevel: "S1 Terapan" },
+  { id: "TI-D4-TRPL", departmentId: "TI", name: "Teknologi Rekayasa Perangkat Lunak", degreeLevel: "S1 Terapan" },
+  { id: "TI-D4-TRE", departmentId: "TI", name: "Teknologi Rekayasa Elektronika", degreeLevel: "S1 Terapan" },
+  { id: "TI-D4-SDT", departmentId: "TI", name: "Sains Data Terapan", degreeLevel: "S1 Terapan" },
+];
+
 const FALLBACK_ORGANIZATIONS: Organization[] = [
   {
     id: "fallback-1",
@@ -85,9 +139,9 @@ const FALLBACK_ORGANIZATIONS: Organization[] = [
     name: "HIMA Teknologi Rekayasa Perangkat Lunak",
     slug: "hima-trpl",
     description:
-      "Organisasi mahasiswa tingkat Program Studi D4 TRPL yang menyusun program kerja, proposal, dan realisasi kegiatan berjenjang ke HMJ TI.",
+      "Organisasi mahasiswa tingkat Program Studi Sarjana Terapan (S1) TRPL yang menyusun program kerja, proposal, dan realisasi kegiatan berjenjang ke HMJ TI.",
     department: { name: "Teknologi Informasi" },
-    studyProgram: { name: "D4 Teknologi Rekayasa Perangkat Lunak" },
+    studyProgram: { name: "Sarjana Terapan (S1) Teknologi Rekayasa Perangkat Lunak" },
     parent: { name: "HMJ Teknologi Informasi" },
   },
   {
@@ -109,7 +163,7 @@ export function OrganizationDirectory() {
   const [departmentId, setDepartmentId] = useState("");
   const [studyProgramId, setStudyProgramId] = useState("");
   const [departments, setDepartments] = useState<Department[]>(FALLBACK_DEPARTMENTS);
-  const [studyPrograms, setStudyPrograms] = useState<StudyProgram[]>([]);
+  const [studyPrograms, setStudyPrograms] = useState<StudyProgram[]>(FALLBACK_STUDY_PROGRAMS);
   const [organizations, setOrganizations] = useState<Organization[]>([]);
   const [usingFallback, setUsingFallback] = useState(false);
 
@@ -120,10 +174,11 @@ export function OrganizationDirectory() {
     ])
       .then(([departmentItems, studyProgramItems]) => {
         if (departmentItems.length > 0) setDepartments(departmentItems);
-        setStudyPrograms(studyProgramItems);
+        if (studyProgramItems.length > 0) setStudyPrograms(studyProgramItems);
       })
       .catch(() => {
         setDepartments(FALLBACK_DEPARTMENTS);
+        setStudyPrograms(FALLBACK_STUDY_PROGRAMS);
       });
   }, []);
 

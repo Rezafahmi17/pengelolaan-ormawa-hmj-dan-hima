@@ -4,3 +4,4 @@
   "installCommand": "pnpm install --frozen-lockfile",
   "buildCommand": "pnpm --filter @sim-ormawa/contracts build && pnpm build"
 }
+

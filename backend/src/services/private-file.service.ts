@@ -40,11 +40,14 @@ export function sanitizeOriginalFilename(name: string, fallbackExtension: string
 
 function getSupabaseHeaders(extra: Record<string, string> = {}) {
   const key = env.SUPABASE_SERVICE_ROLE_KEY ?? '';
-  return {
-    Authorization: `Bearer ${key}`,
+  const headers: Record<string, string> = {
     apikey: key,
     ...extra,
   };
+  if (!key.startsWith('sb_')) {
+    headers.Authorization = `Bearer ${key}`;
+  }
+  return headers;
 }
 
 async function ensureSupabaseBucket() {

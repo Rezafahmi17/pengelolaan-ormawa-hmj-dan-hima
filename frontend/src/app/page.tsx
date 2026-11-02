@@ -184,62 +184,150 @@ const TENANT_TIERS = [
 const POLINELA_DEPARTMENTS = [
   {
     code: 'BTP',
-    name: 'Budidaya Tanaman Pangan',
+    name: 'Jurusan Budidaya Tanaman Pangan',
     count: '5 Program Studi',
-    degrees: 'D3 · D4 · S2',
-    highlights: ['Hortikultura', 'Teknologi Perbenihan', 'Ketahanan Pangan (S2)'],
+    degrees: 'D3 · S1 Terapan · S2',
+    groups: [
+      { level: 'Diploma Tiga (D3)', programs: ['Hortikultura'] },
+      {
+        level: 'Sarjana Terapan (S1)',
+        programs: [
+          'Teknologi Perbenihan',
+          'Teknologi Produksi Tanaman Pangan',
+          'Teknologi Produksi Tanaman Hortikultura',
+        ],
+      },
+      { level: 'Magister Terapan (S2)', programs: ['Ketahanan Pangan'] },
+    ],
   },
   {
     code: 'BTKB',
-    name: 'Budidaya Tanaman Perkebunan',
+    name: 'Jurusan Budidaya Tanaman Perkebunan',
     count: '4 Program Studi',
-    degrees: 'D3 · D4',
-    highlights: ['Produksi Tanaman Perkebunan', 'Pengelolaan Perkebunan Kopi', 'PMIP'],
+    degrees: 'D3 · S1 Terapan',
+    groups: [
+      { level: 'Diploma Tiga (D3)', programs: ['Produksi Tanaman Perkebunan'] },
+      {
+        level: 'Sarjana Terapan (S1)',
+        programs: [
+          'Produksi dan Manajemen Industri Perkebunan',
+          'Pengelolaan Perkebunan Kopi',
+          'Teknologi Produksi Tanaman Perkebunan',
+        ],
+      },
+    ],
   },
   {
     code: 'TP',
-    name: 'Teknologi Pertanian',
-    count: '7 Program Studi',
-    degrees: 'D3 · D4',
-    highlights: ['Mekanisasi Pertanian', 'Teknologi Pangan', 'Kimia Terapan', 'Gizi Klinis'],
+    name: 'Jurusan Teknologi Pertanian',
+    count: '6 Program Studi',
+    degrees: 'D3 · S1 Terapan',
+    groups: [
+      { level: 'Diploma Tiga (D3)', programs: ['Mekanisasi Pertanian', 'Teknologi Pangan'] },
+      {
+        level: 'Sarjana Terapan (S1)',
+        programs: [
+          'Pengembangan Produk Agroindustri',
+          'Kimia Terapan',
+          'Teknologi Pangan Halal',
+          'Gizi Klinis',
+        ],
+      },
+    ],
   },
   {
     code: 'PTR',
-    name: 'Peternakan',
-    count: '5 Program Studi',
-    degrees: 'D3 · D4',
-    highlights: ['Produksi Ternak', 'Teknologi Pakan Ternak', 'Agribisnis Peternakan'],
+    name: 'Jurusan Peternakan',
+    count: '3 Program Studi',
+    degrees: 'S1 Terapan',
+    groups: [
+      {
+        level: 'Sarjana Terapan (S1)',
+        programs: [
+          'Teknologi Pakan Ternak',
+          'Teknologi Produksi Ternak',
+          'Agribisnis Peternakan',
+        ],
+      },
+    ],
   },
   {
     code: 'EB',
-    name: 'Ekonomi dan Bisnis',
+    name: 'Jurusan Ekonomi dan Bisnis',
     count: '11 Program Studi',
-    degrees: 'D2 · D3 · D4 · S2',
-    highlights: ['Agribisnis Pangan', 'Akuntansi Perpajakan', 'Bisnis Digital', 'Perhotelan'],
+    degrees: 'D3 · S1 Terapan · S2',
+    groups: [
+      { level: 'Diploma Tiga (D3)', programs: ['Perjalanan Wisata'] },
+      {
+        level: 'Sarjana Terapan (S1)',
+        programs: [
+          'Agribisnis Pangan',
+          'Pengelolaan Agribisnis',
+          'Akuntansi Perpajakan',
+          'Akuntansi Bisnis Digital',
+          'Pengelolaan Perhotelan',
+          'Pengelolaan Konvensi dan Acara',
+          'Bahasa Inggris untuk Komunikasi Bisnis dan Profesional',
+          'Produksi Media',
+          'Bisnis Digital',
+        ],
+      },
+      { level: 'Magister Terapan (S2)', programs: ['Manajemen Inovasi Agribisnis'] },
+    ],
   },
   {
     code: 'TK',
-    name: 'Teknik',
+    name: 'Jurusan Teknik',
     count: '4 Program Studi',
-    degrees: 'D3 · D4',
-    highlights: ['Konstruksi Jalan & Jembatan', 'Rekayasa Kimia Industri', 'Rekayasa Otomotif'],
+    degrees: 'D3 · S1 Terapan',
+    groups: [
+      {
+        level: 'Diploma Tiga (D3)',
+        programs: ['Teknik Sumberdaya Lahan dan Lingkungan'],
+      },
+      {
+        level: 'Sarjana Terapan (S1)',
+        programs: [
+          'Teknologi Rekayasa Konstruksi Jalan dan Jembatan',
+          'Teknologi Rekayasa Kimia Industri',
+          'Teknologi Rekayasa Otomotif',
+        ],
+      },
+    ],
   },
   {
     code: 'PK',
-    name: 'Perikanan dan Kelautan',
+    name: 'Jurusan Perikanan dan Kelautan',
     count: '5 Program Studi',
-    degrees: 'D2 · D3 · D4',
-    highlights: ['Budidaya Perikanan', 'Teknologi Akuakultur', 'Perikanan Tangkap'],
+    degrees: 'D3 · S1 Terapan',
+    groups: [
+      { level: 'Diploma Tiga (D3)', programs: ['Budidaya Perikanan', 'Perikanan Tangkap'] },
+      {
+        level: 'Sarjana Terapan (S1)',
+        programs: [
+          'Teknologi Pembenihan Ikan',
+          'Teknologi Akuakultur',
+          'Teknologi Cerdas Penangkapan Ikan',
+        ],
+      },
+    ],
   },
   {
     code: 'TI',
-    name: 'Teknologi Informasi',
+    name: 'Jurusan Teknologi Informasi',
     count: '5 Program Studi',
-    degrees: 'D2 · D3 · D4',
-    highlights: [
-      'Teknologi Rekayasa Perangkat Lunak',
-      'Teknologi Rekayasa Internet',
-      'Sains Data Terapan',
+    degrees: 'D3 · S1 Terapan',
+    groups: [
+      { level: 'Diploma Tiga (D3)', programs: ['Manajemen Informatika'] },
+      {
+        level: 'Sarjana Terapan (S1)',
+        programs: [
+          'Teknologi Rekayasa Internet',
+          'Teknologi Rekayasa Perangkat Lunak',
+          'Teknologi Rekayasa Elektronika',
+          'Sains Data Terapan',
+        ],
+      },
     ],
   },
 ];
@@ -759,37 +847,50 @@ export default function HomePage() {
                 </p>
               </div>
               <div className="glass-chip rounded-2xl px-4 py-2.5 text-xs font-medium text-white/85">
-                Total Cakupan: <strong>8 Jurusan</strong> · <strong>43 Prodi (D2/D3/D4/S2)</strong>
+                Total Cakupan: <strong>8 Jurusan</strong> ·{' '}
+                <strong>43 Prodi (D3 / S1 Terapan / S2)</strong>
               </div>
             </div>
 
-            <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-2">
               {POLINELA_DEPARTMENTS.map((dept) => (
                 <div
                   key={dept.code}
-                  className="glass-card-vikram flex flex-col justify-between rounded-[26px] p-6 transition-all duration-300 hover:-translate-y-1 hover:border-white/35"
+                  className="glass-card-vikram flex flex-col justify-between rounded-[28px] p-6 sm:p-7 transition-all duration-300 hover:-translate-y-1 hover:border-white/35"
                 >
                   <div>
-                    <div className="flex items-center justify-between">
-                      <span className="glass-chip rounded-xl px-3 py-1 font-heading text-xs font-bold text-emerald-300">
+                    <div className="flex items-center justify-between gap-3">
+                      <span className="glass-chip rounded-xl px-3.5 py-1 font-heading text-xs font-bold text-emerald-300">
                         {dept.code}
                       </span>
-                      <span className="text-xs font-medium text-white/60">{dept.degrees}</span>
+                      <span className="glass-chip rounded-xl px-3 py-1 text-[11px] font-medium text-white/80">
+                        {dept.degrees}
+                      </span>
                     </div>
-                    <h3 className="mt-4 font-heading text-lg font-bold text-white">{dept.name}</h3>
-                    <div className="mt-3 flex flex-wrap gap-1.5">
-                      {dept.highlights.map((prodi) => (
-                        <span
-                          key={prodi}
-                          className="rounded-lg border border-white/12 bg-white/[0.06] px-2.5 py-1 text-[11px] text-white/80"
-                        >
-                          {prodi}
-                        </span>
+                    <h3 className="mt-4 font-heading text-xl font-bold text-white">{dept.name}</h3>
+
+                    <div className="mt-4 space-y-3">
+                      {dept.groups.map((group) => (
+                        <div key={group.level}>
+                          <p className="text-[11px] font-semibold uppercase tracking-wider text-emerald-300/90">
+                            {group.level}
+                          </p>
+                          <div className="mt-1.5 flex flex-wrap gap-1.5">
+                            {group.programs.map((prodi) => (
+                              <span
+                                key={prodi}
+                                className="rounded-lg border border-white/14 bg-white/[0.07] px-2.5 py-1 text-xs text-white/90"
+                              >
+                                {prodi}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
                       ))}
                     </div>
                   </div>
 
-                  <div className="mt-5 border-t border-white/15 pt-3.5 flex items-center justify-between text-xs">
+                  <div className="mt-6 border-t border-white/15 pt-4 flex items-center justify-between text-xs">
                     <span className="font-semibold text-white">{dept.count}</span>
                     <a
                       href="#direktori"

@@ -28,7 +28,7 @@ export function PublicStats() {
     {
       value: `${studyProgramsCount}`,
       label: "Program Studi",
-      sub: "Jenjang D2, D3, D4 & S2",
+      sub: "Jenjang D3, S1 Terapan & S2",
       icon: GraduationCap,
     },
     {

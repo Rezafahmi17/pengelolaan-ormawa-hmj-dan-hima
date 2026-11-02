@@ -23,64 +23,64 @@ async function main() {
   ];
 
   const STUDY_PROGRAMS = [
-    // 1. Budidaya Tanaman Pangan
-    { deptCode: 'BTP', code: 'BTP-D3-HTK', name: 'Hortikultura', degreeLevel: 'D3' },
-    { deptCode: 'BTP', code: 'BTP-D4-TBN', name: 'Teknologi Perbenihan', degreeLevel: 'D4' },
-    { deptCode: 'BTP', code: 'BTP-D4-TPP', name: 'Teknologi Produksi Tanaman Pangan', degreeLevel: 'D4' },
-    { deptCode: 'BTP', code: 'BTP-D4-TPH', name: 'Teknologi Produksi Tanaman Hortikultura', degreeLevel: 'D4' },
-    { deptCode: 'BTP', code: 'BTP-S2-KP', name: 'Ketahanan Pangan', degreeLevel: 'S2' },
+    // 1. Budidaya Tanaman Pangan (5 Prodi)
+    { deptCode: 'BTP', code: 'BTP-D3-HTK', name: 'Hortikultura', degreeLevel: 'Diploma Tiga (D3)' },
+    { deptCode: 'BTP', code: 'BTP-D4-TBN', name: 'Teknologi Perbenihan', degreeLevel: 'Sarjana Terapan (S1)' },
+    { deptCode: 'BTP', code: 'BTP-D4-TPP', name: 'Teknologi Produksi Tanaman Pangan', degreeLevel: 'Sarjana Terapan (S1)' },
+    { deptCode: 'BTP', code: 'BTP-D4-TPH', name: 'Teknologi Produksi Tanaman Hortikultura', degreeLevel: 'Sarjana Terapan (S1)' },
+    { deptCode: 'BTP', code: 'BTP-S2-KP', name: 'Ketahanan Pangan', degreeLevel: 'Magister Terapan (S2)' },
 
-    // 2. Budidaya Tanaman Perkebunan
-    { deptCode: 'BTKB', code: 'BTKB-D3-PTP', name: 'Produksi Tanaman Perkebunan', degreeLevel: 'D3' },
-    { deptCode: 'BTKB', code: 'BTKB-D4-PMIP', name: 'Produksi dan Manajemen Industri Perkebunan', degreeLevel: 'D4' },
-    { deptCode: 'BTKB', code: 'BTKB-D4-PPK', name: 'Pengelolaan Perkebunan Kopi', degreeLevel: 'D4' },
-    { deptCode: 'BTKB', code: 'BTKB-D4-TPTP', name: 'Teknologi Produksi Tanaman Perkebunan', degreeLevel: 'D4' },
+    // 2. Budidaya Tanaman Perkebunan (4 Prodi)
+    { deptCode: 'BTKB', code: 'BTKB-D3-PTP', name: 'Produksi Tanaman Perkebunan', degreeLevel: 'Diploma Tiga (D3)' },
+    { deptCode: 'BTKB', code: 'BTKB-D4-PMIP', name: 'Produksi dan Manajemen Industri Perkebunan', degreeLevel: 'Sarjana Terapan (S1)' },
+    { deptCode: 'BTKB', code: 'BTKB-D4-PPK', name: 'Pengelolaan Perkebunan Kopi', degreeLevel: 'Sarjana Terapan (S1)' },
+    { deptCode: 'BTKB', code: 'BTKB-D4-TPTP', name: 'Teknologi Produksi Tanaman Perkebunan', degreeLevel: 'Sarjana Terapan (S1)' },
 
-    // 3. Teknologi Pertanian
-    { deptCode: 'TP', code: 'TP-D3-MP', name: 'Mekanisasi Pertanian', degreeLevel: 'D3' },
-    { deptCode: 'TP', code: 'TP-D3-TPN', name: 'Teknologi Pangan', degreeLevel: 'D3' },
-    { deptCode: 'TP', code: 'TP-D4-PPA', name: 'Pengembangan Produk Agroindustri', degreeLevel: 'D4' },
-    { deptCode: 'TP', code: 'TP-D4-KT', name: 'Kimia Terapan', degreeLevel: 'D4' },
-    { deptCode: 'TP', code: 'TP-D4-TPH', name: 'Teknologi Pangan Halal', degreeLevel: 'D4' },
-    { deptCode: 'TP', code: 'TP-D4-GK', name: 'Gizi Klinis', degreeLevel: 'D4' },
+    // 3. Teknologi Pertanian (6 Prodi)
+    { deptCode: 'TP', code: 'TP-D3-MP', name: 'Mekanisasi Pertanian', degreeLevel: 'Diploma Tiga (D3)' },
+    { deptCode: 'TP', code: 'TP-D3-TPN', name: 'Teknologi Pangan', degreeLevel: 'Diploma Tiga (D3)' },
+    { deptCode: 'TP', code: 'TP-D4-PPA', name: 'Pengembangan Produk Agroindustri', degreeLevel: 'Sarjana Terapan (S1)' },
+    { deptCode: 'TP', code: 'TP-D4-KT', name: 'Kimia Terapan', degreeLevel: 'Sarjana Terapan (S1)' },
+    { deptCode: 'TP', code: 'TP-D4-TPH', name: 'Teknologi Pangan Halal', degreeLevel: 'Sarjana Terapan (S1)' },
+    { deptCode: 'TP', code: 'TP-D4-GK', name: 'Gizi Klinis', degreeLevel: 'Sarjana Terapan (S1)' },
 
-    // 4. Peternakan
-    { deptCode: 'PTR', code: 'PTR-D4-TPT', name: 'Teknologi Pakan Ternak', degreeLevel: 'D4' },
-    { deptCode: 'PTR', code: 'PTR-D4-TPRT', name: 'Teknologi Produksi Ternak', degreeLevel: 'D4' },
-    { deptCode: 'PTR', code: 'PTR-D4-AP', name: 'Agribisnis Peternakan', degreeLevel: 'D4' },
+    // 4. Peternakan (3 Prodi)
+    { deptCode: 'PTR', code: 'PTR-D4-TPT', name: 'Teknologi Pakan Ternak', degreeLevel: 'Sarjana Terapan (S1)' },
+    { deptCode: 'PTR', code: 'PTR-D4-TPRT', name: 'Teknologi Produksi Ternak', degreeLevel: 'Sarjana Terapan (S1)' },
+    { deptCode: 'PTR', code: 'PTR-D4-AP', name: 'Agribisnis Peternakan', degreeLevel: 'Sarjana Terapan (S1)' },
 
-    // 5. Ekonomi dan Bisnis
-    { deptCode: 'EB', code: 'EB-D3-PW', name: 'Perjalanan Wisata', degreeLevel: 'D3' },
-    { deptCode: 'EB', code: 'EB-D4-AGP', name: 'Agribisnis Pangan', degreeLevel: 'D4' },
-    { deptCode: 'EB', code: 'EB-D4-PA', name: 'Pengelolaan Agribisnis', degreeLevel: 'D4' },
-    { deptCode: 'EB', code: 'EB-D4-AKP', name: 'Akuntansi Perpajakan', degreeLevel: 'D4' },
-    { deptCode: 'EB', code: 'EB-D4-ABD', name: 'Akuntansi Bisnis Digital', degreeLevel: 'D4' },
-    { deptCode: 'EB', code: 'EB-D4-PPH', name: 'Pengelolaan Perhotelan', degreeLevel: 'D4' },
-    { deptCode: 'EB', code: 'EB-D4-PKA', name: 'Pengelolaan Konvensi dan Acara', degreeLevel: 'D4' },
-    { deptCode: 'EB', code: 'EB-D4-BIKBP', name: 'Bahasa Inggris untuk Komunikasi Bisnis dan Profesional', degreeLevel: 'D4' },
-    { deptCode: 'EB', code: 'EB-D4-PM', name: 'Produksi Media', degreeLevel: 'D4' },
-    { deptCode: 'EB', code: 'EB-D4-BD', name: 'Bisnis Digital', degreeLevel: 'D4' },
-    { deptCode: 'EB', code: 'EB-S2-MIA', name: 'Manajemen Inovasi Agribisnis', degreeLevel: 'S2' },
+    // 5. Ekonomi dan Bisnis (11 Prodi)
+    { deptCode: 'EB', code: 'EB-D3-PW', name: 'Perjalanan Wisata', degreeLevel: 'Diploma Tiga (D3)' },
+    { deptCode: 'EB', code: 'EB-D4-AGP', name: 'Agribisnis Pangan', degreeLevel: 'Sarjana Terapan (S1)' },
+    { deptCode: 'EB', code: 'EB-D4-PA', name: 'Pengelolaan Agribisnis', degreeLevel: 'Sarjana Terapan (S1)' },
+    { deptCode: 'EB', code: 'EB-D4-AKP', name: 'Akuntansi Perpajakan', degreeLevel: 'Sarjana Terapan (S1)' },
+    { deptCode: 'EB', code: 'EB-D4-ABD', name: 'Akuntansi Bisnis Digital', degreeLevel: 'Sarjana Terapan (S1)' },
+    { deptCode: 'EB', code: 'EB-D4-PPH', name: 'Pengelolaan Perhotelan', degreeLevel: 'Sarjana Terapan (S1)' },
+    { deptCode: 'EB', code: 'EB-D4-PKA', name: 'Pengelolaan Konvensi dan Acara', degreeLevel: 'Sarjana Terapan (S1)' },
+    { deptCode: 'EB', code: 'EB-D4-BIKBP', name: 'Bahasa Inggris untuk Komunikasi Bisnis dan Profesional', degreeLevel: 'Sarjana Terapan (S1)' },
+    { deptCode: 'EB', code: 'EB-D4-PM', name: 'Produksi Media', degreeLevel: 'Sarjana Terapan (S1)' },
+    { deptCode: 'EB', code: 'EB-D4-BD', name: 'Bisnis Digital', degreeLevel: 'Sarjana Terapan (S1)' },
+    { deptCode: 'EB', code: 'EB-S2-MIA', name: 'Manajemen Inovasi Agribisnis', degreeLevel: 'Magister Terapan (S2)' },
 
-    // 6. Teknik
-    { deptCode: 'TK', code: 'TK-D3-TSLL', name: 'Teknik Sumberdaya Lahan dan Lingkungan', degreeLevel: 'D3' },
-    { deptCode: 'TK', code: 'TK-D4-TRKJJ', name: 'Teknologi Rekayasa Konstruksi Jalan dan Jembatan', degreeLevel: 'D4' },
-    { deptCode: 'TK', code: 'TK-D4-TRKI', name: 'Teknologi Rekayasa Kimia Industri', degreeLevel: 'D4' },
-    { deptCode: 'TK', code: 'TK-D4-TRO', name: 'Teknologi Rekayasa Otomotif', degreeLevel: 'D4' },
+    // 6. Teknik (4 Prodi)
+    { deptCode: 'TK', code: 'TK-D3-TSLL', name: 'Teknik Sumberdaya Lahan dan Lingkungan', degreeLevel: 'Diploma Tiga (D3)' },
+    { deptCode: 'TK', code: 'TK-D4-TRKJJ', name: 'Teknologi Rekayasa Konstruksi Jalan dan Jembatan', degreeLevel: 'Sarjana Terapan (S1)' },
+    { deptCode: 'TK', code: 'TK-D4-TRKI', name: 'Teknologi Rekayasa Kimia Industri', degreeLevel: 'Sarjana Terapan (S1)' },
+    { deptCode: 'TK', code: 'TK-D4-TRO', name: 'Teknologi Rekayasa Otomotif', degreeLevel: 'Sarjana Terapan (S1)' },
 
-    // 7. Perikanan dan Kelautan
-    { deptCode: 'PK', code: 'PK-D3-BP', name: 'Budidaya Perikanan', degreeLevel: 'D3' },
-    { deptCode: 'PK', code: 'PK-D3-PT', name: 'Perikanan Tangkap', degreeLevel: 'D3' },
-    { deptCode: 'PK', code: 'PK-D4-TPI', name: 'Teknologi Pembenihan Ikan', degreeLevel: 'D4' },
-    { deptCode: 'PK', code: 'PK-D4-TAK', name: 'Teknologi Akuakultur', degreeLevel: 'D4' },
-    { deptCode: 'PK', code: 'PK-D4-TCPI', name: 'Teknologi Cerdas Penangkapan Ikan', degreeLevel: 'D4' },
+    // 7. Perikanan dan Kelautan (5 Prodi)
+    { deptCode: 'PK', code: 'PK-D3-BP', name: 'Budidaya Perikanan', degreeLevel: 'Diploma Tiga (D3)' },
+    { deptCode: 'PK', code: 'PK-D3-PT', name: 'Perikanan Tangkap', degreeLevel: 'Diploma Tiga (D3)' },
+    { deptCode: 'PK', code: 'PK-D4-TPI', name: 'Teknologi Pembenihan Ikan', degreeLevel: 'Sarjana Terapan (S1)' },
+    { deptCode: 'PK', code: 'PK-D4-TAK', name: 'Teknologi Akuakultur', degreeLevel: 'Sarjana Terapan (S1)' },
+    { deptCode: 'PK', code: 'PK-D4-TCPI', name: 'Teknologi Cerdas Penangkapan Ikan', degreeLevel: 'Sarjana Terapan (S1)' },
 
-    // 8. Teknologi Informasi
-    { deptCode: 'TI', code: 'TI-D3-MI', name: 'Manajemen Informatika', degreeLevel: 'D3' },
-    { deptCode: 'TI', code: 'TI-D4-TRI', name: 'Teknologi Rekayasa Internet', degreeLevel: 'D4' },
-    { deptCode: 'TI', code: 'TI-D4-TRPL', name: 'Teknologi Rekayasa Perangkat Lunak', degreeLevel: 'D4' },
-    { deptCode: 'TI', code: 'TI-D4-TRE', name: 'Teknologi Rekayasa Elektronika', degreeLevel: 'D4' },
-    { deptCode: 'TI', code: 'TI-D4-SDT', name: 'Sains Data Terapan', degreeLevel: 'D4' },
+    // 8. Teknologi Informasi (5 Prodi)
+    { deptCode: 'TI', code: 'TI-D3-MI', name: 'Manajemen Informatika', degreeLevel: 'Diploma Tiga (D3)' },
+    { deptCode: 'TI', code: 'TI-D4-TRI', name: 'Teknologi Rekayasa Internet', degreeLevel: 'Sarjana Terapan (S1)' },
+    { deptCode: 'TI', code: 'TI-D4-TRPL', name: 'Teknologi Rekayasa Perangkat Lunak', degreeLevel: 'Sarjana Terapan (S1)' },
+    { deptCode: 'TI', code: 'TI-D4-TRE', name: 'Teknologi Rekayasa Elektronika', degreeLevel: 'Sarjana Terapan (S1)' },
+    { deptCode: 'TI', code: 'TI-D4-SDT', name: 'Sains Data Terapan', degreeLevel: 'Sarjana Terapan (S1)' },
   ];
 
   const deptMap = new Map<string, bigint>();
