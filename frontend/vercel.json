@@ -1,7 +1,6 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": "nextjs",
-  "installCommand": "pnpm install --frozen-lockfile",
+  "installCommand": "NODE_ENV=development pnpm install --prod=false --frozen-lockfile",
   "buildCommand": "pnpm --filter @sim-ormawa/contracts build && pnpm build"
 }
-

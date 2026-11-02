@@ -3,19 +3,24 @@ import { env } from './config/env';
 import { logger } from './utils/logger';
 import { prisma } from './core/prisma';
 
-const server = app.listen(env.PORT, () => {
-  logger.info({ port: env.PORT }, 'SIM ORMAWA API siap menerima permintaan');
-});
+let server: ReturnType<typeof app.listen> | undefined;
 
-async function shutdown(signal: string) {
-  logger.info({ signal }, 'Menghentikan server');
-  server.close(async () => {
-    await prisma.$disconnect();
-    process.exit(0);
+if (!process.env.VERCEL) {
+  server = app.listen(env.PORT, () => {
+    logger.info({ port: env.PORT }, 'SIM ORMAWA API siap menerima permintaan');
   });
+
+  const shutdown = async (signal: string) => {
+    logger.info({ signal }, 'Menghentikan server');
+    server?.close(async () => {
+      await prisma.$disconnect();
+      process.exit(0);
+    });
+  };
+
+  process.on('SIGTERM', () => void shutdown('SIGTERM'));
+  process.on('SIGINT', () => void shutdown('SIGINT'));
 }
 
-process.on('SIGTERM', () => void shutdown('SIGTERM'));
-process.on('SIGINT', () => void shutdown('SIGINT'));
-
-export { server };
+export { app, server };
+export default app;

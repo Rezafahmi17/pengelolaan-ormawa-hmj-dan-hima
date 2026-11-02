@@ -1,17 +1,6 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "installCommand": "pnpm install --frozen-lockfile",
-  "buildCommand": "pnpm --filter @sim-ormawa/contracts build && pnpm build",
-  "functions": {
-    "api/index.js": {
-      "includeFiles": "dist/generated/prisma/**"
-    }
-  },
-  "rewrites": [
-    {
-      "source": "/(.*)",
-      "destination": "/api"
-    }
-  ]
+  "framework": "express",
+  "installCommand": "NODE_ENV=development pnpm install --prod=false --frozen-lockfile",
+  "buildCommand": "pnpm --filter @sim-ormawa/contracts build && pnpm build"
 }
-
