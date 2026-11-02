@@ -8,6 +8,7 @@ import { prisma } from '../core/prisma';
 import { ApiError } from '../utils/ApiError';
 
 const storageRoot = path.resolve(env.FILE_STORAGE_PATH);
+
 export const privateUpload = multer({
   storage: multer.memoryStorage(),
   limits: {
@@ -37,6 +38,90 @@ export function sanitizeOriginalFilename(name: string, fallbackExtension: string
   );
 }
 
+function getSupabaseHeaders(extra: Record<string, string> = {}) {
+  const key = env.SUPABASE_SERVICE_ROLE_KEY ?? '';
+  return {
+    Authorization: `Bearer ${key}`,
+    apikey: key,
+    ...extra,
+  };
+}
+
+async function ensureSupabaseBucket() {
+  if (!env.SUPABASE_URL || !env.SUPABASE_SERVICE_ROLE_KEY) return;
+  const bucket = env.SUPABASE_STORAGE_BUCKET;
+  await fetch(`${env.SUPABASE_URL}/storage/v1/bucket`, {
+    method: 'POST',
+    headers: getSupabaseHeaders({ 'Content-Type': 'application/json' }),
+    body: JSON.stringify({
+      id: bucket,
+      name: bucket,
+      public: false,
+      file_size_limit: env.MAX_UPLOAD_SIZE_MB * 1024 * 1024,
+    }),
+  }).catch(() => undefined);
+}
+
+async function uploadToSupabase(key: string, buffer: Buffer, mimeType: string) {
+  if (!env.SUPABASE_URL || !env.SUPABASE_SERVICE_ROLE_KEY) {
+    throw new ApiError(503, 'Konfigurasi Supabase Storage belum lengkap');
+  }
+  const bucket = encodeURIComponent(env.SUPABASE_STORAGE_BUCKET);
+  const objectUrl = `${env.SUPABASE_URL}/storage/v1/object/${bucket}/${encodeURIComponent(key)}`;
+
+  let res = await fetch(objectUrl, {
+    method: 'POST',
+    headers: getSupabaseHeaders({
+      'Content-Type': mimeType,
+      'x-upsert': 'false',
+    }),
+    body: new Uint8Array(buffer),
+  });
+
+  if (res.status === 400 || res.status === 404) {
+    await ensureSupabaseBucket();
+    res = await fetch(objectUrl, {
+      method: 'POST',
+      headers: getSupabaseHeaders({
+        'Content-Type': mimeType,
+        'x-upsert': 'false',
+      }),
+      body: new Uint8Array(buffer),
+    });
+  }
+
+  if (!res.ok) {
+    throw new ApiError(502, 'Gagal mengunggah berkas ke Supabase Storage');
+  }
+}
+
+async function deleteFromSupabase(key: string) {
+  if (!env.SUPABASE_URL || !env.SUPABASE_SERVICE_ROLE_KEY) return;
+  const bucket = encodeURIComponent(env.SUPABASE_STORAGE_BUCKET);
+  await fetch(`${env.SUPABASE_URL}/storage/v1/object/${bucket}/${encodeURIComponent(key)}`, {
+    method: 'DELETE',
+    headers: getSupabaseHeaders(),
+  }).catch(() => undefined);
+}
+
+async function downloadFromSupabase(key: string): Promise<Buffer> {
+  if (!env.SUPABASE_URL || !env.SUPABASE_SERVICE_ROLE_KEY) {
+    throw new ApiError(503, 'Konfigurasi Supabase Storage belum lengkap');
+  }
+  const bucket = encodeURIComponent(env.SUPABASE_STORAGE_BUCKET);
+  const res = await fetch(
+    `${env.SUPABASE_URL}/storage/v1/object/${bucket}/${encodeURIComponent(key)}`,
+    {
+      method: 'GET',
+      headers: getSupabaseHeaders(),
+    },
+  );
+  if (!res.ok) {
+    throw new ApiError(404, 'Berkas tidak ditemukan');
+  }
+  return Buffer.from(await res.arrayBuffer());
+}
+
 export async function withPrivateFile<T>(
   file: Express.Multer.File | undefined,
   tenantId: bigint,
@@ -44,13 +129,22 @@ export async function withPrivateFile<T>(
   link: (tx: Prisma.TransactionClient, fileId: bigint) => Promise<T>,
 ) {
   if (!file) throw new ApiError(422, 'Berkas wajib dipilih');
-  if (env.FILE_STORAGE_DRIVER !== 'local')
+  if (env.FILE_STORAGE_DRIVER !== 'local' && env.FILE_STORAGE_DRIVER !== 'supabase') {
     throw new ApiError(503, 'Penyimpanan berkas belum dikonfigurasi');
+  }
+
+  const driver = env.FILE_STORAGE_DRIVER;
   const detected = detectPrivateFile(file.buffer);
   const filename = sanitizeOriginalFilename(file.originalname, detected.extension);
   const key = crypto.randomUUID();
-  await mkdir(storageRoot, { recursive: true, mode: 0o700 });
-  await writeFile(path.join(storageRoot, key), file.buffer, { flag: 'wx', mode: 0o600 });
+
+  if (driver === 'supabase') {
+    await uploadToSupabase(key, file.buffer, detected.mime);
+  } else {
+    await mkdir(storageRoot, { recursive: true, mode: 0o700 });
+    await writeFile(path.join(storageRoot, key), file.buffer, { flag: 'wx', mode: 0o600 });
+  }
+
   try {
     return await prisma.$transaction(
       async (tx) => {
@@ -58,7 +152,7 @@ export async function withPrivateFile<T>(
           data: {
             tenant_id: tenantId,
             uploaded_by_user_id: userId,
-            storage_driver: 'local',
+            storage_driver: driver,
             storage_key: key,
             original_name: filename,
             mime_type: detected.mime,
@@ -74,13 +168,20 @@ export async function withPrivateFile<T>(
       { isolationLevel: Prisma.TransactionIsolationLevel.Serializable },
     );
   } catch (error) {
-    await unlink(path.join(storageRoot, key)).catch(() => undefined);
+    if (driver === 'supabase') {
+      await deleteFromSupabase(key);
+    } else {
+      await unlink(path.join(storageRoot, key)).catch(() => undefined);
+    }
     throw error;
   }
 }
 
-export async function readPrivateFile(key: string) {
+export async function readPrivateFile(key: string, driver: string = 'local') {
   if (!/^[0-9a-f-]{36}$/.test(key)) throw new ApiError(404, 'Berkas tidak ditemukan');
+  if (driver === 'supabase') {
+    return downloadFromSupabase(key);
+  }
   try {
     return await readFile(path.join(storageRoot, key));
   } catch {

@@ -4,7 +4,9 @@ import bcrypt from 'bcrypt';
 const prisma = new PrismaClient();
 
 async function main() {
-  if (process.env.NODE_ENV === 'production') throw new Error('Seed akun demo tidak boleh dijalankan pada production');
+  if (process.env.NODE_ENV === 'production' && process.env.ALLOW_SEED !== 'true') {
+    throw new Error('Seed akun demo tidak boleh dijalankan pada production (set ALLOW_SEED=true jika ingin mengisi data demo awal)');
+  }
   console.log('Seeding database...');
 
   // 0. Master Akademik: 8 Jurusan & Program Studi

@@ -11,7 +11,7 @@ COPY packages/contracts/package.json packages/contracts/package.json
 RUN pnpm install --frozen-lockfile
 COPY backend backend
 COPY packages packages
-RUN pnpm --filter backend db:generate && pnpm --filter backend build
+RUN pnpm --filter @sim-ormawa/contracts build && pnpm --filter backend build
 
 FROM base AS runtime
 ENV NODE_ENV=production

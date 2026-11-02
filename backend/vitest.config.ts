@@ -7,7 +7,7 @@ export default defineConfig({
     include: ['src/**/*.test.ts'],
     exclude: ['src/**/*.integration.test.ts'],
     env: {
-      DATABASE_URL: 'mysql://test:test@localhost:3306/test',
+      DATABASE_URL: 'postgresql://test:test@localhost:5432/test',
       SESSION_SECRET: 'test-session-secret',
       FRONTEND_URL: 'http://localhost:3000',
       NODE_ENV: 'test',
