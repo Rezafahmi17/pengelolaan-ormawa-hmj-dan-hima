@@ -2,10 +2,9 @@ import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import cookieParser from 'cookie-parser';
-import { env } from './config/env';
 import { errorHandler, notFoundHandler } from './middleware/error.middleware';
 import { apiRateLimiter } from './middleware/rate-limit.middleware';
-import { verifyMutationOrigin } from './middleware/origin.middleware';
+import { extractOrigin, getAllowedOrigins, verifyMutationOrigin } from './middleware/origin.middleware';
 import { requestId } from './middleware/request-id.middleware';
 import { ApiResponse } from './utils/ApiResponse';
 import authRoutes from './modules/auth/auth.routes';
@@ -34,12 +33,29 @@ export function createApp() {
   app.set('trust proxy', 1);
   app.use(requestId);
   app.use(helmet());
-  app.use(cors({ origin: env.FRONTEND_URL, credentials: true }));
+  app.use(
+    cors({
+      origin: (requestOrigin, callback) => {
+        if (!requestOrigin) return callback(null, true);
+        const normalized = extractOrigin(requestOrigin);
+        callback(null, Boolean(normalized && getAllowedOrigins().has(normalized)));
+      },
+      credentials: true,
+    }),
+  );
   app.use(apiRateLimiter);
   app.use(express.json({ limit: '1mb' }));
   app.use(cookieParser());
   app.use(verifyMutationOrigin);
 
+  app.get('/', (_req, res) => {
+    res.status(200).json(
+      ApiResponse.success(
+        { service: 'sim-ormawa-polinela-api', status: 'ok', version: 'v1' },
+        'SIM ORMAWA Polinela API aktif',
+      ),
+    );
+  });
   app.get('/health', (_req, res) => {
     res.status(200).json(ApiResponse.success({ status: 'ok', timestamp: new Date().toISOString() }, 'Service sehat'));
   });

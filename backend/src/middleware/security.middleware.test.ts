@@ -14,7 +14,9 @@ describe('mutation origin and login rate limits', () => {
     app.use(errorHandler);
     await request(app).post('/save').set('Content-Type', 'application/json').expect(403);
     await request(app).post('/save').set('Origin', 'https://evil.example').set('Content-Type', 'application/json').expect(403);
+    await request(app).post('/save').set('Origin', 'https://evil.example').set('Referer', `${env.FRONTEND_URL}/login`).set('Content-Type', 'application/json').expect(403);
     await request(app).post('/save').set('Origin', env.FRONTEND_URL).set('Content-Type', 'application/json').expect(204);
+    await request(app).post('/save').set('Referer', `${env.FRONTEND_URL}/login`).set('Content-Type', 'application/json').expect(204);
   });
 
   it('blocks the sixth login attempt from the same IP', async () => {

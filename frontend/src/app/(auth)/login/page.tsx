@@ -85,7 +85,7 @@ export default function LoginPage() {
             <div className="flex gap-8 pt-2">
               {[
                 { value: '8', label: 'Jurusan' },
-                { value: '31+', label: 'Program Studi' },
+                { value: '43', label: 'Program Studi' },
                 { value: '3', label: 'Jenis Organisasi' },
               ].map(({ value, label }) => (
                 <div key={label}>

@@ -30,8 +30,10 @@ export const envSchema = z
     PORT: z.coerce.number().default(4000),
     FRONTEND_URL: z
       .string()
+      .trim()
       .url()
       .transform((val) => val.replace(/\/+$/, '')),
+    ALLOWED_ORIGINS: z.string().optional(),
     FILE_STORAGE_DRIVER: z.enum(['local', 's3', 'supabase']).default('local'),
     FILE_STORAGE_PATH: z
       .string()
